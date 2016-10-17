@@ -154,7 +154,11 @@ func (d *dbBase) collectFieldValue(mi *modelInfo, fi *fieldInfo, ind reflect.Val
 						value = field.Elem().String()
 					}
 				} else {
+					// HEPRI FIX
 					value = field.String()
+					if value == "" {
+						value = nil
+					}
 				}
 			case TypeFloatField, TypeDecimalField:
 				if nf, ok := field.Interface().(sql.NullFloat64); ok {
